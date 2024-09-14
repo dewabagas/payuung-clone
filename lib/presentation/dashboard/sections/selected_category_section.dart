@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:payuung_clone/presentation/core/constants/assets.dart';
 import 'package:payuung_clone/presentation/core/constants/styles.dart';
+import 'package:payuung_clone/presentation/core/styles/app_colors.dart';
 import 'package:payuung_clone/presentation/core/utils/extension/double_extension.dart';
 import 'package:payuung_clone/presentation/routes/app_route_paths.dart';
 
@@ -60,7 +61,7 @@ class _SelectedCategorySectionState extends State<SelectedCategorySection> {
     },
     {
       'icon': AppIcons.icLihatSemua,
-      'text': 'Lihat\nSemua',
+      'text': 'Lihat Semua',
       'route': RoutePaths.dashboard,
       'isActive': true
     },
@@ -78,13 +79,22 @@ class _SelectedCategorySectionState extends State<SelectedCategorySection> {
             children: [
               Text('Kategori Pilihan', style: TextStyles.bold14),
               Container(
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                decoration: BoxDecoration(
+                    color: AppColors.grey2,
+                    borderRadius: BorderRadius.circular(30.r)),
                 child: Row(
                   children: [
                     Text('Wishlist', style: TextStyles.regular12),
                     4.0.width,
                     Container(
-                      decoration: BoxDecoration(shape: BoxShape.circle),
-                      child: Text('0'),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: AppColors.primary),
+                      child: Text('0',
+                          style: TextStyles.regular10
+                              .copyWith(color: AppColors.white)),
                     )
                   ],
                 ),
@@ -108,8 +118,8 @@ class _SelectedCategorySectionState extends State<SelectedCategorySection> {
                       child: Center(
                         child: SvgPicture.asset(
                           item['icon'],
-                          width: 40.w,
-                          height: 40.h,
+                          width: 32.w,
+                          height: 32.h,
                         ),
                       ),
                     ),

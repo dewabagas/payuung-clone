@@ -73,8 +73,8 @@ class _FinancialProductsSectionState extends State<FinancialProductsSection> {
                       child: Center(
                         child: SvgPicture.asset(
                           item['icon'],
-                          width: 40.w,
-                          height: 40.h,
+                          width: 36.w,
+                          height: 36.h,
                         ),
                       ),
                     ),
