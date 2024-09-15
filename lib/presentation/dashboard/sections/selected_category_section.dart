@@ -108,6 +108,7 @@ class _SelectedCategorySectionState extends State<SelectedCategorySection> {
             childAspectRatio: 1,
             shrinkWrap: true,
             padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
             children: menuItems.map((item) {
               return Padding(
                 padding: EdgeInsets.only(right: 12.w),

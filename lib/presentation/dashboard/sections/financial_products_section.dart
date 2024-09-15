@@ -63,6 +63,7 @@ class _FinancialProductsSectionState extends State<FinancialProductsSection> {
             childAspectRatio: 1,
             shrinkWrap: true,
             padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
             children: menuItems.map((item) {
               return Padding(
                 padding: EdgeInsets.only(right: 12.w),

@@ -29,7 +29,6 @@ class DatabaseHelper {
         await db.execute(
           'CREATE TABLE wellness_vouchers(id INTEGER PRIMARY KEY, voucherName TEXT, price INTEGER, merchantName TEXT, imageUrl TEXT)',
         );
-        // Insert dummy data
         await _insertDummyData(db);
       },
       version: 1,

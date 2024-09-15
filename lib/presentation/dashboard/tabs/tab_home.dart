@@ -55,7 +55,8 @@ class _TabHomeState extends State<TabHome> {
           const Divider(color: AppColors.primary, thickness: 0.2),
           const FinancialProductsSection(),
           const SelectedCategorySection(),
-          const ExploreWellnessSection()
+          const ExploreWellnessSection(),
+          100.0.height,
         ]),
       ),
     );
