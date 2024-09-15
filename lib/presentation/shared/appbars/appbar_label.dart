@@ -42,14 +42,9 @@ AppBar appbarLabelAlternative(
               width: 32.w,
               height: 32.w,
               child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border:
-                      Border.all(color: borderColor ?? AppColors.strokeLight),
-                ),
                 child: Icon(
                   Icons.chevron_left,
-                  color: iconColor ?? AppColors.darkText2,
+                  color: iconColor ?? AppColors.strokeDark,
                 ),
               ),
             ),

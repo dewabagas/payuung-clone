@@ -52,13 +52,13 @@ class PageWrapper extends StatelessWidget {
                 title: appBarTitle,
                 actions: appBarActions,
                 hasBack: hasBack,
-                backgroundColor: AppColors.bgLight,
+                backgroundColor: AppColors.white,
                 borderColor: AppColors.strokeLight,
                 titleColor: AppColors.strokeDark,
                 onBackPressed:
                     onBackPressed ?? () => GoRouter.of(context).pop()),
         body: Container(
-            color: AppColors.bgLight,
+            color: AppColors.white,
             padding: padding ??
                 EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             child: Stack(children: [

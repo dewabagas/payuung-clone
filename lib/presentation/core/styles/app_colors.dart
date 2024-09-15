@@ -18,6 +18,9 @@ class AppColors {
   static const Color shadowColor = Color(0xFF3A3A3A);
   static const Color grey = Color(0xFFC4C6C5);
   static const Color grey2 = Color(0xFFE5E5E5);
+  static const Color grey3 = Color(0xFF8295A6);
+  static const Color grey4 = Color(0xFFB6B6B6);
+  static const Color grey5 = Color(0xFF838792);
   static const Color pink = Color(0xFFFF90BC);
   static const Color orange = Color(0xFFc57e2e);
   static const Color backgroundGrey = Color(0xFFF2F3F8);
@@ -30,9 +33,9 @@ class AppColors {
   static const Color lightText3 = Color(0xffE8EBF1);
   static const Color strokeLight = Color(0xffE2E8F0);
   static const Color lightGrey = Color(0xffF6F8F7);
-  static const Color lightGrey2 = Color(0xffD1D4DC);
-  static const Color lightGrey3 = Color(0xffF7FAFF);
-  static const Color lightGrey4 = Color(0xffefedec);
+  static const Color lightGrey2 = Color(0xffE4E9EC);
+  static const Color lightGrey3 = Color(0xffE8E9EE);
+  static const Color lightGrey4 = Color(0xffE8E8E8);
   static const Color deepBlue = Color(0xff040815);
   static const Color slateBlue = Color(0xff596780);
   static const Color lightCharcoal = Color(0xff404347);

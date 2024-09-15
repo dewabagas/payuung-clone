@@ -29,6 +29,8 @@ dependencies:
   injectable: ^2.4.4
   get_it: ^7.7.0
   path: ^1.9.0
+  image_picker: ^1.1.2
+  easy_stepper: ^0.8.5+1
 
 dev_dependencies:
   flutter_test:
