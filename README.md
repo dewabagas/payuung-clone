@@ -1,16 +1,44 @@
-# payuung_clone
 
-A new Flutter project.
+# Payuung Clone
 
-## Getting Started
+Welcome to the Payuung Clone repository! This mobile application is built using Flutter, implementing various features and state management using BLoC and Cubit.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Separation of Concern
+- State Management with BLoC and Cubit
+- Local database using Sqflite
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## APK (if you want to install directly with your device)
+https://drive.google.com/file/d/1Uoh1kTQS8W6VbZfym11sMtd3_8dzHptX/view?usp=sharing
+
+## Installation
+
+1. Clone the repository :
+
+```bash
+git clone https://github.com/dewabagas/payuung-clone.git
+cd klontong-app
+```
+2. Install dependencies :
+```bash 
+flutter pub get 
+```
+2. Run the app : 
+```bash 
+flutter run 
+```
+Make sure your device or emulator/simulator is running !## 📸 Screenshots
+
+| Home | Home Bottom | NavBar |
+| ------------ | ------------ | ------------ |
+| <img src="https://snipboard.io/BKDt42.jpg" width="200"/> | <img src="https://snipboard.io/IGoMfL.jpg" width="200"/> | <img src="https://snipboard.io/YzGPLh.jpg" width="200"/> |
+
+| Profile | Biodata Diri | Alamat Pribadi |
+| ------------ | ------------ | ------------ |
+| <img src="https://snipboard.io/AQml8x.jpg" width="200"/> | <img src="https://snipboard.io/CBF8is.jpg" width="200"/> | <img src="https://snipboard.io/D9Oy8s.jpg" width="200"/> |
+
+| Informasi Perusahaan |
+| ------------ | 
+| <img src="https://snipboard.io/Y1VMWz.jpg" width="200"/> |
