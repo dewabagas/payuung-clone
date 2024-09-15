@@ -20,6 +20,7 @@ class AppIcons {
   static const String icKonsultasiMedis =
       'assets/icons/ic_konsultasi_medis.svg';
   static const String icLihatSemua = 'assets/icons/ic_lihat_semua.svg';
+  static const String icPayuung = 'assets/icons/ic_payuung.svg';
 }
 
 class AppImages {

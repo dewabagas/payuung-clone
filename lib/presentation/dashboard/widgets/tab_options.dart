@@ -34,12 +34,12 @@ class TabOptions extends StatelessWidget {
       curve: Curves.easeInToLinear,
       children: {
         0: Text(
-          'Learn',
+          'Payuung Pribadi',
           style: TextStyles.regular12.copyWith(
               color: selectedIndex == 0 ? AppColors.white : AppColors.grey),
         ),
         1: Text(
-          'Exercise',
+          'Payuung Karyawan',
           style: TextStyles.regular12.copyWith(
               color: selectedIndex == 1 ? AppColors.white : AppColors.grey),
         ),

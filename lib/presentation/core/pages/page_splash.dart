@@ -1,5 +1,6 @@
 import 'dart:async'; // Import Timer
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:payuung_clone/presentation/core/constants/assets.dart';
 import 'package:payuung_clone/presentation/core/styles/app_colors.dart';
@@ -28,9 +29,9 @@ class _PageSplashState extends State<PageSplash> {
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
-        child: Center(child: Text('Payuung')
-            // child: Image.asset(AppImages.imgEmpty, width: screenWidth / 1.4),
-            ),
+        child: Center(
+            child:
+                SvgPicture.asset(AppIcons.icPayuung, width: screenWidth / 1.4)),
       ),
     );
   }

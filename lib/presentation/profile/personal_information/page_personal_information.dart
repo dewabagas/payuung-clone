@@ -50,7 +50,6 @@ class _PagePersonalInformationState extends State<PagePersonalInformation> {
       appBarTitle: 'Informasi Pribadi',
       child: Column(
         children: [
-          // Easy Stepper Header
           EasyStepper(
             activeStep: activeStep,
             stepRadius: 20.r,
@@ -63,7 +62,7 @@ class _PagePersonalInformationState extends State<PagePersonalInformation> {
             finishedStepIconColor: AppColors.primary,
             finishedStepTextColor: AppColors.primary,
             lineStyle: LineStyle(
-              lineLength: screenWidth / 3.4,
+              lineLength: screenWidth / 4,
               activeLineColor: AppColors.primary,
               defaultLineColor: AppColors.primary.withOpacity(0.2),
               lineThickness: 2,
@@ -121,23 +120,20 @@ class _PagePersonalInformationState extends State<PagePersonalInformation> {
                 });
               },
               children: [
-                // Step 1: Biodata Diri
                 SingleChildScrollView(
                   child: Column(
                     children: [
                       _buildBiodataForm(),
-                      SizedBox(height: 20), // Add some space
+                      20.0.height,
                       _buildNextButton(),
                     ],
                   ),
                 ),
-                // Step 2: Alamat Pribadi
                 SingleChildScrollView(
-                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
                       _buildAddressForm(),
-                      SizedBox(height: 20), // Add some space
+                      20.0.height,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -149,13 +145,11 @@ class _PagePersonalInformationState extends State<PagePersonalInformation> {
                     ],
                   ),
                 ),
-                // Step 3: Informasi Perusahaan
                 SingleChildScrollView(
-                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
                       _buildCompanyInfoForm(),
-                      SizedBox(height: 20), // Add some space
+                      20.0.height,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

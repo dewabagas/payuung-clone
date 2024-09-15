@@ -1,13 +1,15 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:payuung_clone/presentation/core/constants/assets.dart';
 import 'package:payuung_clone/presentation/core/constants/styles.dart';
 import 'package:payuung_clone/presentation/core/styles/app_colors.dart';
 import 'package:payuung_clone/presentation/core/utils/extension/double_extension.dart';
-import 'package:payuung_clone/presentation/dashboard/tabs/tab_home.dart';
+import 'package:payuung_clone/presentation/dashboard/sections/explore_wellness_section.dart';
+import 'package:payuung_clone/presentation/dashboard/sections/financial_products_section.dart';
+import 'package:payuung_clone/presentation/dashboard/sections/selected_category_section.dart';
+import 'package:payuung_clone/presentation/dashboard/widgets/tab_options.dart';
+import 'package:payuung_clone/presentation/routes/app_route_paths.dart';
+import 'package:payuung_clone/presentation/shared/pages/page_decoration_top.dart';
 
 class PageDashboard extends StatefulWidget {
   final int bottomNavIndex;
@@ -20,143 +22,156 @@ class PageDashboard extends StatefulWidget {
 
 class _PageDashboardState extends State<PageDashboard>
     with TickerProviderStateMixin {
-  late int _bottomNavIndex;
+  int selectedIndex = 0;
+  late PageController pageController;
 
-  late AnimationController _fabAnimationController;
-  late AnimationController _borderRadiusAnimationController;
-  late Animation<double> fabAnimation;
-  late Animation<double> borderRadiusAnimation;
-  late CurvedAnimation fabCurve;
-  late CurvedAnimation borderRadiusCurve;
-  late AnimationController _hideBottomBarAnimationController;
-
+  static const _minChildSize = 0.15;
+  static const _maxChildSize = 0.5;
+  final _sheetPosition = ValueNotifier<double>(_minChildSize);
   final iconList = [
     {
       'active': BottomBar.icAboutActive,
       'inactive': BottomBar.icAboutInactive,
-      'title': 'About'
-    },
-    {
-      'active': BottomBar.icProfileActive,
-      'inactive': BottomBar.icProfileInactive,
-      'title': 'Account'
+      'title': 'Beranda',
+      'route': RoutePaths.dashboard
     },
   ];
 
-  final List<Widget> tabScreens = [
-    const TabHome(),
-    const TabHome(),
-    const TabHome(),
+  final List<Map<String, dynamic>> menuItems = [
+    {'icon': Icons.home, 'title': 'Beranda'},
+    {'icon': Icons.search, 'title': 'Cari'},
+    {'icon': Icons.shopping_cart, 'title': 'Keranjang'},
+    {'icon': Icons.receipt_long, 'title': 'Daftar Transaksi'},
+    {'icon': Icons.card_giftcard, 'title': 'Voucher Saya'},
+    {'icon': Icons.location_on, 'title': 'Alamat Pengiriman'},
+    {'icon': Icons.people, 'title': 'Daftar Teman'},
   ];
 
   @override
   void initState() {
     super.initState();
-
-    _bottomNavIndex = widget.bottomNavIndex;
-
-    _fabAnimationController = AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
-    _borderRadiusAnimationController = AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
-    fabCurve = CurvedAnimation(
-        parent: _fabAnimationController,
-        curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn));
-    borderRadiusCurve = CurvedAnimation(
-        parent: _borderRadiusAnimationController,
-        curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn));
-
-    fabAnimation = Tween<double>(begin: 0, end: 1).animate(fabCurve);
-    borderRadiusAnimation =
-        Tween<double>(begin: 0, end: 1).animate(borderRadiusCurve);
-
-    _hideBottomBarAnimationController = AnimationController(
-        duration: const Duration(milliseconds: 100), vsync: this);
-
-    Future.delayed(
-        const Duration(seconds: 1), () => _fabAnimationController.forward());
-    Future.delayed(const Duration(seconds: 1),
-        () => _borderRadiusAnimationController.forward());
-  }
-
-  bool onScrollNotification(ScrollNotification notification) {
-    if (notification is UserScrollNotification &&
-        notification.metrics.axis == Axis.vertical) {
-      switch (notification.direction) {
-        case ScrollDirection.forward:
-          _hideBottomBarAnimationController.reverse();
-          _fabAnimationController.forward(from: 0);
-          break;
-        case ScrollDirection.reverse:
-          _hideBottomBarAnimationController.forward();
-          _fabAnimationController.reverse(from: 1);
-          break;
-        case ScrollDirection.idle:
-          break;
-      }
-    }
-    return false;
+    pageController = PageController(initialPage: 0);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      backgroundColor: AppColors.white,
-      body: NotificationListener<ScrollNotification>(
-          child: tabScreens[_bottomNavIndex]),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primary.withOpacity(0.1),
-        elevation: 0,
-        child: SvgPicture.asset(BottomBar.icHome, width: 30.w, height: 30.w),
-        onPressed: () {
-          setState(() {
-            _bottomNavIndex = 2;
-          });
-        },
+    return PageDecorationTop(
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                24.0.height,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: TabOptions(
+                    selectedIndex: selectedIndex,
+                    onValueChanged: (i) {
+                      pageController.animateToPage(
+                        i,
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.ease,
+                      );
+                      setState(() {
+                        selectedIndex = i;
+                      });
+                    },
+                  ),
+                ),
+                16.0.height,
+                const Divider(color: AppColors.primary, thickness: 0.2),
+                const FinancialProductsSection(),
+                const SelectedCategorySection(),
+                const ExploreWellnessSection(),
+                100.0.height,
+              ],
+            ),
+          ),
+          // Tambahkan DraggableScrollableSheet di sini
+          _buildDraggableCard(),
+        ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AnimatedBottomNavigationBar.builder(
-        itemCount: iconList.length,
-        tabBuilder: (int index, bool isActive) {
-          final iconPath = isActive
-              ? iconList[index]['active']
-              : iconList[index]['inactive'];
-          final title = iconList[index]['title'] as String;
-          final color = isActive ? AppColors.primary : AppColors.neutral;
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(iconPath!, width: 24.w, height: 24.w),
-              4.0.height,
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text(title,
-                      maxLines: 1,
-                      style: TextStyles.medium10.copyWith(color: color)))
-            ],
-          );
-        },
-        backgroundColor: AppColors.white,
-        activeIndex: _bottomNavIndex,
-        splashColor: AppColors.white,
-        notchAndCornersAnimation: borderRadiusAnimation,
-        splashSpeedInMilliseconds: 200,
-        notchSmoothness: NotchSmoothness.defaultEdge,
-        gapLocation: GapLocation.center,
-        height: 80.h,
-        elevation: 0,
-        borderWidth: 0,
-        onTap: (index) => setState(() => _bottomNavIndex = index),
-        hideAnimationController: _hideBottomBarAnimationController,
-        shadow: BoxShadow(
-          offset: const Offset(0, 0),
-          blurRadius: 4,
-          spreadRadius: 0,
-          color: const Color(0xFF3A3A3A).withOpacity(0.25),
-        ),
-      ),
+    );
+  }
+
+  Widget _buildDraggableCard() {
+    return DraggableScrollableSheet(
+      initialChildSize: _minChildSize,
+      minChildSize: _minChildSize,
+      maxChildSize: _maxChildSize,
+      builder: (BuildContext context, ScrollController scrollController) {
+        return GestureDetector(
+          onTap: () {
+            if (_sheetPosition.value == _minChildSize) {
+              _sheetPosition.value = _maxChildSize;
+            } else {
+              _sheetPosition.value = _minChildSize;
+            }
+          },
+          onVerticalDragUpdate: (details) {
+            _sheetPosition.value -= details.primaryDelta! / 1000;
+            if (_sheetPosition.value < _minChildSize) {
+              _sheetPosition.value = _minChildSize;
+            }
+            if (_sheetPosition.value > _maxChildSize) {
+              _sheetPosition.value = _maxChildSize;
+            }
+          },
+          onVerticalDragEnd: (details) {
+            if (_sheetPosition.value < (_maxChildSize + _minChildSize) / 2) {
+              _sheetPosition.value = _minChildSize;
+            } else {
+              _sheetPosition.value = _maxChildSize;
+            }
+          },
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            padding: EdgeInsets.zero,
+            curve: Curves.easeInOut,
+            height: MediaQuery.of(context).size.height * _sheetPosition.value,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.r),
+                  topRight: Radius.circular(20.r),
+                ),
+                border: Border.all(color: AppColors.grey, width: 0.5)),
+            child: GridView.builder(
+              controller: scrollController,
+              padding: EdgeInsets.zero,
+              itemCount: menuItems.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.0,
+                  crossAxisSpacing: 0,
+                  mainAxisSpacing: 0),
+              itemBuilder: (context, index) {
+                final item = menuItems[index];
+                return GestureDetector(
+                  onTap: () {},
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        item['icon'],
+                        size: 36.sp,
+                        color: AppColors.primary,
+                      ),
+                      2.0.height,
+                      Text(
+                        item['title'],
+                        style: TextStyles.regular12,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
