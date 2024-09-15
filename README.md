@@ -11,7 +11,7 @@ Welcome to the Payuung Clone repository! This mobile application is built using 
 - Local database using Sqflite
 
 ## APK (if you want to install directly with your device)
-https://drive.google.com/file/d/1Uoh1kTQS8W6VbZfym11sMtd3_8dzHptX/view?usp=sharing
+https://drive.google.com/file/d/1U8lOvjVaKHmcty8n9JEYzKqz0h_HlK6s/view?usp=sharing
 
 ## Installation
 
